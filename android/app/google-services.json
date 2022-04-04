@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "430569349319",
+    "project_id": "activebro-886ff",
+    "storage_bucket": "activebro-886ff.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:430569349319:android:73e4047bd04a0dac7adee2",
+        "android_client_info": {
+          "package_name": "com.example.activebro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "430569349319-jllauu9ia5u59gh6vm2v3p1eifl23ics.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8se-7rKDqFkeRa_z37yHervJKzl91MmY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "430569349319-jllauu9ia5u59gh6vm2v3p1eifl23ics.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
