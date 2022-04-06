@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'register.dart';
 import 'login.dart';
+import 'AboutActive.dart';
 
 class SignUp extends StatelessWidget {
   final String title = "Sign Up";
@@ -14,7 +15,10 @@ class SignUp extends StatelessWidget {
         body: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
               Widget>[
-            Image.asset('images/active.png'),
+            Padding(
+              padding: EdgeInsets.fromLTRB(10.0,0,10.0,0),
+              child: Image.asset('images/active.png'),
+            ),
             Padding(
               padding: EdgeInsets.all(10.0),
               child: Text("Ingresa",
@@ -54,6 +58,20 @@ class SignUp extends StatelessWidget {
                 style: TextStyle(color: Color.fromARGB(255, 200, 200, 200)),
               ),
             ),
+            TextButton.icon(// About us// text
+              label: Text('About Us'),
+              icon: Icon(Icons.info_outline),
+              style: ButtonStyle(
+                //backgroundColor: MaterialStateProperty.all<Color>(Colors.orangeAccent),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+              ),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => AboutUsPage()),
+                    );
+                  },
+              ),
           ]),
         ));
   }

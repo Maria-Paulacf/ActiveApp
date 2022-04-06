@@ -1,69 +1,119 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:activebro/behaviors/hiddenScrollBehavior.dart';
+
+import 'home.dart';
 
 class LoginPage extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() => _LoginPageState();
+  _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _formKey = GlobalKey<FormState>();
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  bool isLoading = false;
+
   @override
-  Widget build(BuildContext context){
+  Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Login'),),
-      body: Container(
-        padding: EdgeInsets.all(20.0),
-        child: ScrollConfiguration(
-          behavior: HiddenScrollBehavior(),
-          child: Form(
-            child: ListView(
-              children: <Widget>[
-                FlutterLogo(
-                  style: FlutterLogoStyle.markOnly,
-                  size: 200.0,
-                ),
-                TextFormField(autocorrect: false,
-                  keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(labelText: 'Email or UserName'),
-                ),
-                TextFormField(
-                  obscureText: true,
-                  decoration: InputDecoration(labelText: 'Password'),
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(vertical: 20.0),
-                  child: Text(
-                    'Bienvenido al servicio de entrenamiento ActiveBro',
-                    style: TextStyle(color: Color.fromARGB(255, 200, 200, 200)),
+        appBar: AppBar(title: Text("Login")),
+        body: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+                child: Column(children: <Widget>[
+                  Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: TextFormField(
+                      controller: emailController,
+                      decoration: InputDecoration(
+                        labelText: "Enter Email Address",
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      // The validator receives the text that the user has entered.
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter Email Address';
+                        } else if (!value.contains('@')) {
+                          return 'Please enter a valid email address!';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
-                ),
-                TextButton(
-                  onPressed: (){
-                    Navigator.of(context).pushNamed('/forgotPassword');
-                  },
-                  child: const Text('Olvidé la contraseña'),
-                  style: TextButton.styleFrom(
-                      primary: Colors.amber,),
-                ),
-              ],
-            ),
-          ),
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){},
-        child: Icon(Icons.account_circle),
-      ),
-      persistentFooterButtons: <Widget>[
-        TextButton(
-          onPressed: (){
-            Navigator.of(context).pop();
-          },
-          child: Text('Aún no tengo una cuenta'),
-        ),
-      ],
-    );
+                  Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: TextFormField(
+                      obscureText: true,
+                      controller: passwordController,
+                      decoration: InputDecoration(
+                        labelText: "Enter Password",
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                      ),
+                      // The validator receives the text that the user has entered.
+                      validator: (value) {
+                        if (value!.isEmpty) {
+                          return 'Enter Password';
+                        } else if (value.length < 6) {
+                          return 'Password must be at least 6 characters!';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(20.0),
+                    child: isLoading
+                        ? CircularProgressIndicator()
+                        : ElevatedButton(
+                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.orange)),
+                      onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                          setState(() {
+                            isLoading = true;
+                          });
+                          logInToFb();
+                        }
+                      },
+                      child: Text('Submit'),
+                    ),
+                  )
+                ]))));
   }
 
+  void logInToFb() {
+    FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+        email: emailController.text, password: passwordController.text)
+        .then((result) {
+      isLoading = false;
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => Home(uid: result.user!.uid)),
+      );
+    }).catchError((err) {
+      print(err.message);
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text("Error"),
+              content: Text(err.message),
+              actions: [
+                ElevatedButton(
+                  child: Text("Ok"),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                )
+              ],
+            );
+          });
+    });
+  }
 }
