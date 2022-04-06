@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'register.dart';
 import 'login.dart';
 import 'AboutActive.dart';
@@ -11,13 +12,22 @@ class SignUp extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(this.title),
+          backgroundColor: Colors.orange,
         ),
-        body: Center(
+        body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('images/intro2.png'),
+            fit: BoxFit.cover,
+            colorFilter: ColorFilter.mode(Colors.white.withOpacity(0.0),BlendMode.colorBurn),
+          ),
+        ),
+        child: Center(
           child: Column(mainAxisAlignment: MainAxisAlignment.center, children: <
               Widget>[
             Padding(
               padding: EdgeInsets.fromLTRB(10.0,0,10.0,0),
-              child: Image.asset('images/active.png'),
+              child: SvgPicture.asset('images/active.svg'),
             ),
             Padding(
               padding: EdgeInsets.all(10.0),
@@ -52,7 +62,7 @@ class SignUp extends StatelessWidget {
                     },
                     backgroundColor: Colors.orange,)),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 20.0),
+              padding: EdgeInsets.all(10.0),
               child: Text(
                 'Disfruta de los servicios que te ofrece Actiot',
                 style: TextStyle(color: Color.fromARGB(255, 200, 200, 200)),
@@ -73,6 +83,7 @@ class SignUp extends StatelessWidget {
                   },
               ),
           ]),
-        ));
+        ),)
+    );
   }
 }

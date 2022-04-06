@@ -1,10 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
-import 'package:flutter/src/widgets/async.dart';
-
-
+import 'package:flutter_svg/flutter_svg.dart';
 import 'signup.dart';
+import 'Training.dart';
 
 class Home extends StatelessWidget {
   Home({this.uid});
@@ -16,6 +14,7 @@ class Home extends StatelessWidget {
     return Scaffold(
         appBar: AppBar(
           title: Text(title),
+          backgroundColor: Colors.orange,
           actions: <Widget>[
             IconButton(
               icon: Icon(
@@ -34,7 +33,147 @@ class Home extends StatelessWidget {
             )
           ],
         ),
-        body: Center(child: Text('Welcome!')),
+        body: Center(
+            child: Column(mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: EdgeInsets.fromLTRB(10,0,10,10),
+                      child: SvgPicture.asset('images/notyet.svg'),
+                    ),
+                  ),
+                  Padding(// Que ofrecemos?
+                    //alignment: Alignment.centerRight,
+                      padding: EdgeInsets.fromLTRB(30, 10, 20, 20),
+                      child: Align(
+                        alignment: Alignment.center,
+                        child:
+                        Text("¿Qué deseas hacer?",
+                            style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 30,
+                                fontFamily: 'Roboto')),
+                      )),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(30, 10, 20, 10),
+                    child: TextButton.icon(// Entrenar
+                      label: Text('Entrenar  ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 30,
+                              fontFamily: 'Roboto')),
+
+                      icon: Icon(Icons.accessibility_rounded,
+                        size: 30,
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                side: BorderSide(color: Colors.orange)
+                            )),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TrainingPage()),
+                        );
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.fromLTRB(30, 10, 20, 10),
+                    child: TextButton.icon(// Ver Resumen
+                      label: Text('Resumen  ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 30,
+                              fontFamily: 'Roboto')),
+
+                      icon: Icon(Icons.timer,
+                        size: 30,
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                side: BorderSide(color: Colors.orange)
+                            )),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TrainingPage()),
+                        );
+                      },
+                    ),
+                  ),
+                  Padding( // Progreso
+                    padding: EdgeInsets.fromLTRB(30, 10, 20, 10),
+                    child: TextButton.icon(// Ver progreso
+                      label: Text('Progreso  ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 30,
+                              fontFamily: 'Roboto')),
+
+                      icon: Icon(Icons.timeline_outlined,
+                        size: 30,
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                side: BorderSide(color: Colors.orange)
+                            )),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TrainingPage()),
+                        );
+                      },
+                    ),
+                  ),
+                  Padding( // Progreso
+                    padding: EdgeInsets.fromLTRB(30, 10, 20, 10),
+                    child: TextButton.icon(// Ver progreso
+                      label: Text('Actividad  ',
+                          style: TextStyle(
+                              fontWeight: FontWeight.normal,
+                              fontSize: 30,
+                              fontFamily: 'Roboto')),
+
+                      icon: Icon(Icons.calendar_today_outlined,
+                        size: 30,
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(Colors.orange),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                        shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(15.0),
+                                side: BorderSide(color: Colors.orange)
+                            )),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => TrainingPage()),
+                        );
+                      },
+                    ),
+                  ),
+                ]
+            ),
+        ),
         drawer: NavigateDrawer(uid: this.uid));
   }
 }

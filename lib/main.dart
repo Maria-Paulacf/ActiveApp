@@ -18,7 +18,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'ActiveSys',
-      theme: ThemeData.dark(),
+      theme: ThemeData(
+          primaryColor: Colors.orange,
+          scaffoldBackgroundColor: Colors.white24,
+          fontFamily: 'Roboto',
+          textTheme: ThemeData.dark().textTheme,
+          buttonTheme: ButtonThemeData(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
+            buttonColor: Colors.orange,
+          )
+      ),
       home: IntroScreen(),
     );
   }

@@ -10,6 +10,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text('Active'),
+        backgroundColor: Colors.orange,
       ),
       body: ListView(
         //child: Column(mainAxisAlignment: MainAxisAlignment.center,

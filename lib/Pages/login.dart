@@ -18,7 +18,11 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Login")),
+        appBar: AppBar(
+            title: Text("Login"),
+            backgroundColor: Colors.orange
+        ),
+
         body: Form(
             key: _formKey,
             child: SingleChildScrollView(
@@ -29,7 +33,11 @@ class _LoginPageState extends State<LoginPage> {
                       controller: emailController,
                       decoration: InputDecoration(
                         labelText: "Enter Email Address",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ),
                         enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -51,7 +59,11 @@ class _LoginPageState extends State<LoginPage> {
                       controller: passwordController,
                       decoration: InputDecoration(
                         labelText: "Enter Password",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ),
                         enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),

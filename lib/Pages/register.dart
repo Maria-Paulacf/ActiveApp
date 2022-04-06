@@ -22,7 +22,10 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(title: Text("Sign Up")),
+        appBar: AppBar(
+            title: Text("Sign Up"),
+            backgroundColor: Colors.orange,
+        ),
         body: Form(
             key: _formKey,
             child: SingleChildScrollView(
@@ -33,7 +36,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: nameController,
                       decoration: InputDecoration(
                         labelText: "Enter User Name",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ),
                         enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -52,7 +59,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: emailController,
                       decoration: InputDecoration(
                         labelText: "Enter Email",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ),
                         enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -74,7 +85,11 @@ class _RegisterPageState extends State<RegisterPage> {
                       controller: passwordController,
                       decoration: InputDecoration(
                         labelText: "Enter Password",
+                        labelStyle: TextStyle(
+                          color: Colors.white,
+                        ),
                         enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -94,7 +109,7 @@ class _RegisterPageState extends State<RegisterPage> {
                     child: isLoading
                         ? CircularProgressIndicator()
                         : ElevatedButton(
-                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.lightBlue)),
+                      style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.orange)),
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
                           setState(() {
