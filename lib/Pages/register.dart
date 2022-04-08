@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-
 import 'home.dart';
+import 'login.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -37,10 +37,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       decoration: InputDecoration(
                         labelText: "Enter User Name",
                         labelStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black54,
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                          borderSide: BorderSide(color: Colors.orange, width: 2.0),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -60,10 +60,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       decoration: InputDecoration(
                         labelText: "Enter Email",
                         labelStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black54,
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                          borderSide: BorderSide(color: Colors.orange, width: 2.0),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -86,10 +86,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       decoration: InputDecoration(
                         labelText: "Enter Password",
                         labelStyle: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black54,
                         ),
                         enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                          borderSide: BorderSide(color: Colors.orange, width: 2.0),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                       ),
@@ -118,9 +118,28 @@ class _RegisterPageState extends State<RegisterPage> {
                           registerToFb();
                         }
                       },
-                      child: Text('Submit'),
+                      child: Text('Submit',
+                        style: TextStyle(fontSize: 18),),
                     ),
-                  )
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(0),
+                    child: TextButton(// About us// text
+                      child: Text('Ya tengo una cuenta',
+                      style: TextStyle(fontSize: 15,),),
+                      style: ButtonStyle(
+                        //backgroundColor: MaterialStateProperty.all<Color>(Colors.orangeAccent),
+                        foregroundColor: MaterialStateProperty.all<Color>(Colors.black54),
+                        alignment: Alignment.bottomLeft,
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => LoginPage()),
+                        );
+                      },
+                    ),
+                  ),
                 ]))));
   }
 

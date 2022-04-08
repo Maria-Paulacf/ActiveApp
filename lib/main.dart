@@ -20,9 +20,8 @@ class MyApp extends StatelessWidget {
       title: 'ActiveSys',
       theme: ThemeData(
           primaryColor: Colors.orange,
-          scaffoldBackgroundColor: Colors.white24,
+          scaffoldBackgroundColor: Colors.white,
           fontFamily: 'Roboto',
-          textTheme: ThemeData.dark().textTheme,
           buttonTheme: ButtonThemeData(
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18.0)),
             buttonColor: Colors.orange,
@@ -44,11 +43,12 @@ class IntroScreen extends StatelessWidget {
         navigateAfterSeconds: result != null ? Home(uid: result.uid) : SignUp(),
         seconds: 5,
         title: new Text(
-          'Welcome To ActioT',
-          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+          'Welcome To ActiveBro',
+          style: new TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.orange.shade900),
+          textAlign: TextAlign.center ,
         ),
         image: Image.asset('images/active.png', fit: BoxFit.scaleDown),
-        backgroundColor: Colors.black54,
+        backgroundColor: Colors.white,
         styleTextUnderTheLoader: new TextStyle(),
         photoSize: 100.0,
         onClick: () => print("flutter"),

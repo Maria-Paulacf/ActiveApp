@@ -17,16 +17,29 @@ class _AboutUsPageState extends State<AboutUsPage> {
         children: <Widget>[
       Padding(// Quienes somos
         //alignment: Alignment.centerRight,
-          padding: EdgeInsets.fromLTRB(30, 30, 20, 0),
-          child: Align(
-            alignment: Alignment.center,
-            child:
-            Text("¿Quienes somos?",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                    fontFamily: 'Roboto')),
-          )),
+          padding: EdgeInsets.fromLTRB(30, 50, 20,0),
+          child: Container(// Asistencia personalizada
+            //alignment: Alignment.centerRight,
+            width: 4,
+            height: 50,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.orange,
+                width: 4,
+              ), //Border.all
+              borderRadius: BorderRadius.circular(18),
+
+            ),
+            child: Center(
+              child:
+              Text("¿Quienes somos?",
+                  style: TextStyle(
+                      color: Colors.orange,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 23,
+                      fontFamily: 'Roboto')),
+            ),
+          ),),
       Padding(
         padding: EdgeInsets.all(30.0),
         child: Text("Active es una empresa enfocada al diseño "
@@ -41,30 +54,45 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 fontSize: 17,
                 fontFamily: 'Roboto')),
       ),
-      Padding(// Que ofrecemos?
+      Padding(// Quienes somos
         //alignment: Alignment.centerRight,
-          padding: EdgeInsets.fromLTRB(30, 10, 20, 10),
-          child: Align(
-            alignment: Alignment.center,
+        padding: EdgeInsets.fromLTRB(30, 30, 20, 0),
+        child: Container(// Asistencia personalizada
+          //alignment: Alignment.centerRight,
+          width: 4,
+          height: 50,
+          decoration: BoxDecoration(
+            border: Border.all(
+              color: Colors.orange,
+              width: 4,
+            ), //Border.all
+            borderRadius: BorderRadius.circular(18),
+
+          ),
+          child: Center(
             child:
             Text("¿Qué ofrecemos?",
                 style: TextStyle(
+                    color: Colors.orange,
                     fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                    fontSize: 23,
                     fontFamily: 'Roboto')),
-          )),
-      Padding(// Asistencia personalizada
-        //alignment: Alignment.centerRight,
-        padding: EdgeInsets.fromLTRB(30, 20, 20, 0),
-        child: Align(
-          alignment: Alignment.centerLeft,
-          child:
-            Text("Asistencia personalizada",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  fontFamily: 'Roboto')),
-      )),
+          ),
+        ),),
+          Padding(// Control estadísticas
+            //alignment: Alignment.centerRight,
+              padding: EdgeInsets.fromLTRB(30, 20, 20, 0),
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child:
+                Text("Asistencia personalizada",
+                    style: TextStyle(
+                        color: Colors.orange,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                        fontFamily: 'Roboto')),
+              )),
+
       Padding(
         padding: EdgeInsets.all(30.0),
         child: Text("ActiveBro te ofrece una retroalimentación en tiempo"
@@ -86,8 +114,9 @@ class _AboutUsPageState extends State<AboutUsPage> {
           child: Align(
             alignment: Alignment.centerLeft,
             child:
-            Text("Controla tu progreso",
+            Text("Control de tu progreso",
                 style: TextStyle(
+                    color: Colors.orange,
                     fontWeight: FontWeight.bold,
                     fontSize: 20,
                     fontFamily: 'Roboto')),
@@ -107,6 +136,7 @@ class _AboutUsPageState extends State<AboutUsPage> {
                 fontSize: 17,
                 fontFamily: 'Roboto')),
       ),
+
     ]),
     );
   }
