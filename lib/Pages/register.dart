@@ -1,8 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'home.dart';
 import 'login.dart';
+import 'home.dart';
 
 class RegisterPage extends StatefulWidget {
   @override
@@ -170,6 +170,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   child: Text("Ok"),
                   onPressed: () {
                     Navigator.of(context).pop();
+                    setState(() {
+                      isLoading = false;
+                    });
                   },
                 )
               ],

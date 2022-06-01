@@ -1,8 +1,12 @@
+import 'package:activebro/Pages/SummProgressPage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'signup.dart';
 import 'Training.dart';
+import 'account.dart';
+import 'AboutActive.dart';
 
 class Home extends StatelessWidget {
   Home({this.uid});
@@ -16,21 +20,6 @@ class Home extends StatelessWidget {
           title: Text(title),
           backgroundColor: Colors.orange,
           actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.exit_to_app,
-                color: Colors.white,
-              ),
-              onPressed: () {
-                FirebaseAuth auth = FirebaseAuth.instance;
-                auth.signOut().then((res) {
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignUp()),
-                          (Route<dynamic> route) => false);
-                });
-              },
-            )
           ],
         ),
         body: Center(
@@ -137,7 +126,7 @@ class Home extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TrainingPage()),
+                          MaterialPageRoute(builder: (context) => SummProgressPage()),
                         );
                       },
                     ),
@@ -166,7 +155,7 @@ class Home extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => TrainingPage()),
+                          MaterialPageRoute(builder: (context) => SummProgressPage()),
                         );
                       },
                     ),
@@ -178,6 +167,7 @@ class Home extends StatelessWidget {
   }
 }
 
+
 class NavigateDrawer extends StatefulWidget {
   final String? uid;
   NavigateDrawer({Key? key, this.uid}) : super(key: key);
@@ -186,14 +176,46 @@ class NavigateDrawer extends StatefulWidget {
 }
 
 
+
 class _NavigateDrawerState extends State<NavigateDrawer> {
   @override
   Widget build(BuildContext context) {
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
+          UserAccountsDrawerHeader(
+            accountEmail: FutureBuilder<DatabaseEvent>(
+              future: FirebaseDatabase.instance.ref().child("Users").child(widget.uid!).once(),
+              builder:(context, AsyncSnapshot<DatabaseEvent> snapshot){
+                if (snapshot.hasData) {
+                   Map Email = snapshot.data!.snapshot.value as Map;
+                  return Text(Email['email']);
+                } else {
 
+                  return CircularProgressIndicator(color: Colors.deepOrange);
+                }
+              }),
+            accountName: FutureBuilder<DatabaseEvent>(
+            future: FirebaseDatabase.instance.ref().child("Users").child(widget.uid!).once(),
+            builder:(context, AsyncSnapshot<DatabaseEvent> snapshot){
+                if (snapshot.hasData) {
+                    Map Name = snapshot.data!.snapshot.value as Map;
+                   return Text(Name['name']);
+                 } else {
+
+                return CircularProgressIndicator(color: Colors.deepOrange);
+                }
+              }
+            ),
+            currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage("http://los40ar00.epimg.net/los40/imagenes/2021/08/18/tecnologia/1629298995_035720_1629299442_noticia_normal.jpg"),
+            ), ),
+          Divider(
+            height: 1,
+            thickness: 1,
+          ),
           ListTile(
             leading: new IconButton(
               icon: new Icon(Icons.home, color: Colors.black),
@@ -208,18 +230,72 @@ class _NavigateDrawerState extends State<NavigateDrawer> {
               );
             },
           ),
+          Divider(
+            height: 1,
+            thickness: 1,
+          ),
           ListTile(
             leading: new IconButton(
-              icon: new Icon(Icons.settings, color: Colors.black),
+              icon: new Icon(Icons.account_circle, color: Colors.black),
               onPressed: () => null,
             ),
-            title: Text('Settings'),
+            title: Text('Account'),
             onTap: () {
               print(widget.uid);
+              Navigator.push(
+                context,
+                  MaterialPageRoute(builder: (context) => account()),
+              );
             },
+          ),
+          Divider(
+            height: 1,
+            thickness: 1,
+          ),
+          ListTile(
+            leading: new IconButton(
+              icon: new Icon(Icons.info_outline, color: Colors.black),
+              onPressed: () => null,
+            ),
+            title: Text('About Active'),
+            onTap: () {
+              print(widget.uid);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => AboutUsPage()),
+              );
+            },
+          ),
+          Divider(
+            height: 1,
+            thickness: 1,
+          ),
+          ListTile(
+            leading: new IconButton(
+              icon: new Icon(Icons.exit_to_app, color: Colors.black),
+              onPressed: () => null,
+            ),
+            title: Text('Log out'),
+            onTap: () {
+              FirebaseAuth auth = FirebaseAuth.instance;
+              auth.signOut().then((res) {
+                Navigator.pushAndRemoveUntil(
+                    context, MaterialPageRoute(builder: (context) => SignUp()),
+                        (Route<dynamic> route) => false);
+                }
+              );
+            }
+          ),
+          Divider(
+            height: 1,
+            thickness: 1,
           ),
         ],
       ),
     );
+
+
   }
+
+
 }
